@@ -1,0 +1,20 @@
+@use './variable' as *;
+
+@mixin button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: $font-main;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  
+    &:hover {
+      background-color: darken($color-primary, 5%);
+    }
+  
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+  

@@ -1,0 +1,14 @@
+@use './variable' as *;
+
+.light-theme {
+    background-color: $color-background-light;
+    color: $color-text-light;
+    min-height: 100vh;
+  }
+  
+  .dark-theme {
+    background-color: $color-background-dark;
+    color: $color-text-dark;
+    min-height: 100vh;
+  }
+  

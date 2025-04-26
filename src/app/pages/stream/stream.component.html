@@ -1,0 +1,34 @@
+<div class="stream-wrapper">
+    <h2>Live Стрім</h2>
+  
+    <div class="video-container">
+      <!-- Місце для WebRTC відео -->
+      <video autoplay muted playsinline></video>
+    </div>
+  
+    <div class="controls">
+      <button class="btn record">🔴 Почати запис</button>
+      <button class="btn mute">🔇 Вимкнути звук</button>
+      <button class="btn download">⬇️ Завантажити відео</button>
+    </div>
+  
+    <div class="sections">
+      <div class="archive">
+        <h3>Архів Записів</h3>
+        <ul>
+          <li *ngFor="let item of [1,2,3]">
+            23.02.2025 14:30 <button class="btn small">▶️</button>
+          </li>
+        </ul>
+      </div>
+  
+      <div class="notifications">
+        <h3>Сповіщення</h3>
+        <div class="alert" *ngFor="let alert of [1,2]">
+          ⚠️ Рух виявлено <br />
+          <small>ID: {{ alert }} – {{ '28.02.2025 10:2' + alert }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
