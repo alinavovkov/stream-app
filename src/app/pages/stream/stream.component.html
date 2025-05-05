@@ -1,34 +1,62 @@
 <div class="stream-wrapper">
-    <h2>Live Стрім</h2>
-  
-    <div class="video-container">
-      <!-- Місце для WebRTC відео -->
-      <video autoplay muted playsinline></video>
+  <h2>Live Стрім</h2>
+
+  <div class="content-layout">
+    <div class="left-side">
+      <div class="video-container">
+        <video src="assets/images/4444928-hd_1920_1080_30fps.mp4" controls autoplay muted playsinline></video>
+      </div>
+
+      <div class="controls">
+        <!-- <button class="btn">🔴 Почати запис</button> -->
+        <button class="button" [ngClass]="{ 'primary': isRecording, 'secondary': !isRecording }"
+          (click)="toggleRecording()">
+          {{ isRecording ? '⏹️ Зупинити запис' : '🔴 Почати запис' }}
+        </button>
+        <!-- <button class="button secondary">🔇 Вимкнути звук</button> -->
+        <button
+        class="button"
+        [ngClass]="{ 'primary': isMuted, 'secondary': !isMuted }"
+        (click)="toggleMute()"
+      >
+        {{ isMuted ? '🔊 Увімкнути звук' : '🔇 Вимкнути звук' }}
+      </button>
+      
+        <button class="button secondary">⬇️ Завантажити відео</button>
+      </div>
     </div>
-  
-    <div class="controls">
-      <button class="btn record">🔴 Почати запис</button>
-      <button class="btn mute">🔇 Вимкнути звук</button>
-      <button class="btn download">⬇️ Завантажити відео</button>
-    </div>
-  
-    <div class="sections">
+
+    <div class="right-side">
       <div class="archive">
         <h3>Архів Записів</h3>
         <ul>
-          <li *ngFor="let item of [1,2,3]">
-            23.02.2025 14:30 <button class="btn small">▶️</button>
+          <li>
+
+            23.02.2025 14:30
+            <button class="btn small">▶️</button>
+          </li>
+          <li>
+            23.02.2025 14:30
+            <button class="btn small">▶️</button>
+          </li>
+          <li>
+            23.02.2025 14:30
+            <button class="btn small">▶️</button>
           </li>
         </ul>
       </div>
-  
+
       <div class="notifications">
         <h3>Сповіщення</h3>
-        <div class="alert" *ngFor="let alert of [1,2]">
+        <div class="alert">
           ⚠️ Рух виявлено <br />
-          <small>ID: {{ alert }} – {{ '28.02.2025 10:2' + alert }}</small>
+          <small>ID: 1 – 28.02.2025 10:21</small>
+        </div>
+        <div class="alert">
+          ⚠️ Рух виявлено <br />
+          <small>ID: 2 – 28.02.2025 10:22</small>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

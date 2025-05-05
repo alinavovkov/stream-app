@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StreamComponent } from './pages/stream/stream.component';
 import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ArchiveComponent } from './pages/archive/archive.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StreamComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    ArchiveComponent
   ],
   imports: [
     BrowserModule,

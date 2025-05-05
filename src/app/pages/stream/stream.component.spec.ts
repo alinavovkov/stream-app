@@ -20,4 +20,5 @@ describe('StreamComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });

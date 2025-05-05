@@ -1,3 +1,37 @@
 @use './app/styles/variable' as *;
 @use './app/styles/mixins' as *;
 @use './app/styles/theme' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s;
+
+}
+
+/* ======= SCROLLBAR CUSTOMIZATION ======= */
+
+::-webkit-scrollbar {
+    width: 8px; /* Товщина вертикальної */
+    height: 8px; /* Товщина горизонтальної */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent; /* Фон треку */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: $color-accent; /* Колір скролбару */
+    border-radius: 10px;
+    border: 2px solid transparent; /* для ефекту обводки */
+    background-clip: content-box;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: darken($color-accent, 10%);
+  }
+  
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  

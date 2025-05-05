@@ -1,0 +1,71 @@
+@use '../../styles/variable' as *;
+@use '../../styles/mixins' as *;
+
+.archive-wrapper {
+  padding: $padding-base;
+  font-family: $font-main;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: $color-accent;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .records-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .record {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: $border-radius;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+
+      .record-info {
+        font-weight: 600;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .record-actions {
+        display: flex;
+        gap: 12px;
+
+        .btn.small {
+          @include button;
+          padding: 6px 12px;
+          font-size: 14px;
+          background-color: $color-primary;
+          color: white;
+
+          &:hover {
+            background-color: darken($color-primary, 10%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.light-theme .archive-wrapper {
+  background-color: $color-background-light;
+  color: $color-text-light;
+}
+
+.dark-theme .archive-wrapper {
+  background-color: $color-background-dark;
+  color: $color-text-dark;
+}

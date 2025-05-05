@@ -1,14 +1,87 @@
 @use './variable' as *;
 
-.light-theme {
-    background-color: $color-background-light;
-    color: $color-text-light;
-    min-height: 100vh;
+// ======= ТЕМИ =======
+
+// Світла тема
+.light-theme,
+.light-theme body,
+.light-theme .app-header,
+.light-theme .stream-wrapper,
+.light-theme .archive-wrapper {
+  background-color: $color-background-light;
+  color: $color-text-light;
+}
+
+.light-theme a {
+  color: $color-text-light;
+}
+
+.light-theme .nav-links a.active {
+  color: $color-primary;
+}
+
+// Темна тема
+.dark-theme,
+.dark-theme body,
+.dark-theme .stream-wrapper,
+.dark-theme .archive-wrapper {
+  background-color: $color-background-dark;
+  color: $color-text-dark;
+}
+
+.dark-theme a {
+  color: $color-text-dark;
+}
+
+.dark-theme .nav-links a.active {
+  color: $color-primary;
+}
+
+.dark-theme
+
+// сторінки
+
+.stream-wrapper,
+.archive-wrapper {
+  padding: $padding-base;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.stream-wrapper h2 {
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+.archive-wrapper h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+// 🔴 Активна кнопка
+.button.primary {
+  background-color: $color-primary;
+  color: $color-text-dark;
+
+  &:hover {
+    background-color: darken($color-primary, 5%);
   }
-  
-  .dark-theme {
-    background-color: $color-background-dark;
-    color: $color-text-dark;
-    min-height: 100vh;
+}
+
+// 🟦 Вторинна кнопка (адаптивна до теми)
+.light-theme .button.secondary {
+  background-color: $color-soft-gray;
+  color: $color-charcoal;
+
+  &:hover {
+    background-color: darken($color-soft-gray, 15%);
   }
-  
+}
+
+.dark-theme .button.secondary {
+  background-color: $color-charcoal;
+  color: $color-soft-gray;
+
+  &:hover {
+    background-color: lighten($color-charcoal, 15%);
+  }
+}

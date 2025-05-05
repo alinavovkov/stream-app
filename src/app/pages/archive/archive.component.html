@@ -1,0 +1,16 @@
+<div class="archive-wrapper">
+    <h2>Архів Записів</h2>
+  
+    <div class="records-list">
+      <div class="record" *ngFor="let record of records">
+        <div class="record-info">
+          📅 {{ record.date }}
+        </div>
+        <div class="record-actions">
+          <button class="btn" (click)="viewRecord(record)">▶️ Переглянути</button>
+          <button class="btn" (click)="downloadRecord(record)">⬇️ Завантажити</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
