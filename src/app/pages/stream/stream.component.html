@@ -3,21 +3,26 @@
 
   <div class="content-layout">
     <div class="left-side">
-      {{ isStreaming ? 'трансляція увімкнена' : 'трансляція вимкнена' }}
-
-      <div class="video-container" *ngIf="isStreaming">
-        <!-- <img [src]="streamUrl" alt="Live stream" /> -->
-        <img
-        #streamImage
-        [src]="streamUrl"
-        (load)="onImageLoaded()"
-        alt="Live stream"
-      />
+      <div class="video-container">
+        <ng-container *ngIf="isStreaming; else noStream">
+          <img
+            #streamImage
+            [src]="streamUrl"
+            (load)="onImageLoaded()"
+            alt="Live stream"
+            use-credentials
+          />
+          <canvas #canvas hidden></canvas>
+        </ng-container>
       
-        <canvas #canvas hidden></canvas>
-
-        <!-- <video src="assets/images/4444928-hd_1920_1080_30fps.mp4" controls autoplay muted playsinline></video> -->
+        <ng-template #noStream>
+          <div class="placeholder-text">
+            Трансляція вимкнена<br />
+            Натисніть “Почати трансляцію”
+          </div>
+        </ng-template>
       </div>
+      
 
       <div class="controls">
         <!-- <button class="btn">🔴 Почати запис</button> -->
@@ -29,24 +34,57 @@
         {{ isRecording ? '⏹️ Зупинити запис' : '🔴 Почати запис' }}
         </button>
 
-
-        <button class="button" (click)="toggleMotionDetection()"
-          [ngClass]="{ 'primary': isMotionEnabled, 'secondary': !isMotionEnabled }">
-          {{ isMotionEnabled ? '🛑 Вимкнути детекцію руху' : '👀 Увімкнути детекцію руху' }}
-        </button>
-
-        <!-- <button class="button secondary">🔇 Вимкнути звук</button> -->
-        <button class="button" [ngClass]="{ 'primary': isMuted, 'secondary': !isMuted }" (click)="toggleMute()">
-          {{ isMuted ? '🔊 Увімкнути звук' : '🔇 Вимкнути звук' }}
-        </button>
         <button class="button" (click)="toggleStream()">
           {{ isStreaming ? '⏹️ Зупинити трансляцію' : '📡 Почати трансляцію' }}
         </button>
-        <button class="button secondary">⬇️ Завантажити відео</button>
+
+        <button class="button secondary">Оновити показники</button>
+
+        <!-- <button class="button" (click)="toggleMotionDetection()"
+          [ngClass]="{ 'primary': isMotionEnabled, 'secondary': !isMotionEnabled }">
+          {{ isMotionEnabled ? '🛑 Вимкнути детекцію руху' : '👀 Увімкнути детекцію руху' }}
+        </button> -->
+        
+        <!-- <button class="button secondary">🔇 Вимкнути звук</button> -->
+        <!-- <button class="button" [ngClass]="{ 'primary': isMuted, 'secondary': !isMuted }" (click)="toggleMute()">
+          {{ isMuted ? '🔊 Увімкнути звук' : '🔇 Вимкнути звук' }}
+        </button> -->
+        
       </div>
     </div>
 
     <div class="right-side">
+      <div class="env-data-container">
+        <h3>Показники</h3>
+      
+        <div class="env-grid">
+          <div class="env-card temperature">
+            <div class="icon">🌡️</div>
+            <div class="label">Температура</div>
+            <div class="value">{{ temperature }} °C</div>
+          </div>
+      
+          <div class="env-card pressure">
+            <div class="icon">🌬️</div>
+            <div class="label">Тиск</div>
+            <div class="value">{{ pressure }} гПа</div>
+          </div>
+      
+          <div class="env-card light">
+            <div class="icon">💡</div>
+            <div class="label">Освітленість</div>
+            <div class="value">{{ lightLevel }} лк</div>
+          </div>
+      
+          <div class="env-card co2">
+            <div class="icon">🟢</div>
+            <div class="label">CO₂</div>
+            <div class="value">{{ co2Level }} ppm</div>
+          </div>
+        </div>
+      </div>
+      
+      
       <div class="archive">
         <h3>Архів Записів</h3>
         <ul>
@@ -57,10 +95,6 @@
             </a>
             <button class="btn small" (click)="playRecording(rec.url)">▶️</button>
           </li>
-          <!-- <li>
-            23.02.2025 14:30
-            <button class="btn small">▶️</button>
-          </li>
           <li>
             23.02.2025 14:30
             <button class="btn small">▶️</button>
@@ -68,21 +102,14 @@
           <li>
             23.02.2025 14:30
             <button class="btn small">▶️</button>
-          </li> -->
+          </li>
+          <li>
+            23.02.2025 14:30
+            <button class="btn small">▶️</button>
+          </li>
         </ul>
       </div>
 
-      <div class="notifications">
-        <h3>Сповіщення</h3>
-        <div class="alert">
-          ⚠️ Рух виявлено <br />
-          <small>ID: 1 – 28.02.2025 10:21</small>
-        </div>
-        <div class="alert">
-          ⚠️ Рух виявлено <br />
-          <small>ID: 2 – 28.02.2025 10:22</small>
-        </div>
-      </div>
     </div>
   </div>
 </div>

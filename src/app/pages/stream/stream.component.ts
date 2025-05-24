@@ -9,7 +9,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 export class StreamComponent {
   @ViewChild('streamImage') streamImageRef!: ElementRef<HTMLImageElement>;
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
-  
+
   imageLoaded = false;
   isRecording = false;
   isMuted = false;
@@ -19,19 +19,25 @@ export class StreamComponent {
   cameraIp = 'http://192.168.4.223/sustain?stream=0'; // заміни на свою адресу
   waitingToRecord = false;
 
+  temperature = 23.5;
+  pressure = 1012;
+  lightLevel = 320;
+  co2Level = 450;
+
+
   mediaRecorder!: MediaRecorder;
   recordedChunks: Blob[] = [];
   // recordings: { url: string; date: Date }[] = [];
 
   recordings: { url: string; timestamp: string; filename: string }[] = [];
 
-private saveRecording(blob: Blob) {
-  const url = URL.createObjectURL(blob);
-  const timestamp = new Date().toLocaleString('uk-UA');
-  const filename = `record_${Date.now()}.webm`;
+  private saveRecording(blob: Blob) {
+    const url = URL.createObjectURL(blob);
+    const timestamp = new Date().toLocaleString('uk-UA');
+    const filename = `record_${Date.now()}.webm`;
 
-  this.recordings.unshift({ url, timestamp, filename });
-}
+    this.recordings.unshift({ url, timestamp, filename });
+  }
 
   // toggleRecording() {
   //   this.isRecording = !this.isRecording;
@@ -39,7 +45,7 @@ private saveRecording(blob: Blob) {
   // }
   onImageLoaded(): void {
     this.imageLoaded = true;
-  
+
     // Якщо очікуємо запис після завантаження
     if (this.waitingToRecord) {
       this.waitingToRecord = false;
@@ -49,7 +55,7 @@ private saveRecording(blob: Blob) {
 
   toggleRecording() {
     console.log('recording started');
-    
+
     this.isRecording = !this.isRecording;
     this.isRecording ? this.stopRecording() : this.startRecording();
     // if (this.isRecording) {
@@ -134,7 +140,7 @@ private saveRecording(blob: Blob) {
       this.mediaRecorder.stop();
     }
   }
-  
+
   handleRecordingStop(blob: Blob) {
     this.saveRecording(blob);
   }
@@ -159,22 +165,24 @@ private saveRecording(blob: Blob) {
     this.isStreaming = !this.isStreaming;
 
     if (this.isStreaming) {
-      this.streamUrl = 'http://192.168.4.223/sustain?stream=0' + Date.now();
+      // this.streamUrl = 'http://192.168.0.104/sustain?stream=0' + Date.now();
+      this.streamUrl = 'https://27a7-109-108-224-135.ngrok-free.app/sustain?stream=0';
+
     } else {
       this.streamUrl = ''; // зупинити трансляцію
     }
   }
 
   toggleMotionDetection(): void {
-    this.isMotionEnabled = !this.isMotionEnabled;
+    // this.isMotionEnabled = !this.isMotionEnabled;
 
-    const motionUrl = `${this.cameraIp}/control?enableMotion=${this.isMotionEnabled ? 1 : 0}`;
-    const recordUrl = `${this.cameraIp}/control?record=${this.isMotionEnabled ? 1 : 0}`;
-    const sensitivityUrl = `${this.cameraIp}/control?motionVal=7`; // опційно: встановлює чутливість
+    // const motionUrl = `${this.cameraIp}/control?enableMotion=${this.isMotionEnabled ? 1 : 0}`;
+    // const recordUrl = `${this.cameraIp}/control?record=${this.isMotionEnabled ? 1 : 0}`;
+    // const sensitivityUrl = `${this.cameraIp}/control?motionVal=7`; // опційно: встановлює чутливість
 
-    // Надіслати всі запити послідовно
-    fetch(motionUrl);
-    fetch(recordUrl);
-    fetch(sensitivityUrl);
+    // // Надіслати всі запити послідовно
+    // fetch(motionUrl);
+    // fetch(recordUrl);
+    // fetch(sensitivityUrl);
   }
 }
